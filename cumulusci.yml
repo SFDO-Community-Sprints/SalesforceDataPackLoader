@@ -1,0 +1,22 @@
+minimum_cumulusci_version: '3.60.0.dev1'
+project:
+    name: SalesforceDataPackLoader
+    package:
+        name: SalesforceDataPackLoader
+        api_version: '54.0'
+    git:
+        default_branch: 'main'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/SalesforceDataPackLoader/tests
+            options:
+                outputdir: robot/SalesforceDataPackLoader/results
+
+    robot_testdoc:
+        options:
+            path: robot/SalesforceDataPackLoader/tests
+            output: robot/SalesforceDataPackLoader/doc/SalesforceDataPackLoader_tests.html
+
