@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Load_Data_Bundle</name>
+        <label>Load Data Bundle</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <actionName>LoadSnowfakeryJSONData</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>json_url</name>
+            <value>
+                <elementReference>URL</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>55.0</apiVersion>
+    <interviewLabel>Load Datapack from URL {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Load Datapack from URL</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <description>Get a URL from the user</description>
+        <name>Get_URL</name>
+        <label>Get URL</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Load_Data_Bundle</targetReference>
+        </connector>
+        <fields>
+            <name>URL</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>https://gist.githubusercontent.com/prescod/85efa2b30e52c4ca97d24f5a61631aa4/raw/4e293e07877d63b965f2c75f6bf2edafea3230b4/composite.json</stringValue>
+            </defaultValue>
+            <fieldText>URL</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_URL</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>

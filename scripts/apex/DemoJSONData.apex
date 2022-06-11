@@ -12,7 +12,7 @@ LoadCompositeAPIData.loadJsonSet('https://gist.githubusercontent.com/prescod/85e
 // // load a single-file bundle of 3 Composite Graph JSONs
 // LoadCompositeAPIData.loadJsonSet('https://gist.githubusercontent.com/prescod/6220fa27d8493be954be949c9f57f2b2/raw/b603a4d11ef20f0a30e79260322baa52f969068d/out.bundle.json');
 
-// System.debug('SUCCESS! SUCCESS! SUCCESS! SUCCESS! SUCCESS! SUCCESS! SUCCESS! ');
+System.debug('SUCCESS! SUCCESS! SUCCESS! SUCCESS! SUCCESS! SUCCESS! SUCCESS! ');
 
 // // experimentally, loading much more than 15 JSONs triggers a "cumulative
 // // maximum time allotted for callout" error

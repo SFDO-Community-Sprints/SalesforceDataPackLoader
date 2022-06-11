@@ -89,7 +89,20 @@ public class LoadCompositeAPIData {
         return response.getBody();
     }
 
+    private static HttpResponse callSalesforce(String method, String url, String post_body){
+        Map<String, String> headers = new Map<String, String>{'Authorization' => 'OAuth ' + UserInfo.getSessionId()};
+        url = System.URL.getOrgDomainUrl().toExternalForm() + url;
+        return makeHTTPCall(method, url, post_body, headers);
+    }
+
     private static HttpResponse makeHTTPCall(String method, String url, String post_body){
+        return makeHTTPCall(method, url, post_body, new Map<String, String>{});
+    }
+
+    private static HttpResponse makeHTTPCall(String method, 
+        String url, 
+        String post_body,
+        Map<String, String> headers){
         Http h = new Http();
         HttpRequest request = new HttpRequest();
         request.setEndpoint(url);
@@ -98,8 +111,11 @@ public class LoadCompositeAPIData {
             request.setHeader('Content-Type', 'application/json');
             request.setBody(post_body);
         }
+        for(String header: headers.keySet()){
+            String value = headers.get(header);
+            request.setHeader(header, value);
+        }
 
-        request.setHeader('Authorization', 'OAuth ' + UserInfo.getSessionId());
         request.setTimeout(120000);
          System.debug(url);
         return h.send(request);
@@ -107,8 +123,8 @@ public class LoadCompositeAPIData {
 
     public static void loadRecords(String json_records){
         String error = null;
-        String graph_url = System.URL.getSalesforceBaseUrl().toExternalForm() + '/services/data/v54.0/composite/graph';
-        HttpResponse response = makeHTTPCall('POST', graph_url, json_records);
+        String graph_url =  '/services/data/v54.0/composite/graph';
+        HttpResponse response = callSalesforce('POST', graph_url, json_records);
         String response_body = response.getBody();
         if(response.getStatusCode()!=200){
             error = 'Error creating objects! ' + response.getStatus() + ' ' + response_body;
