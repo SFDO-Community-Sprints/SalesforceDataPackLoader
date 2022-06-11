@@ -9,14 +9,32 @@ project:
     source_format: sfdx
 
 tasks:
-    robot:
+    deploy:
         options:
-            suites: robot/SalesforceDataPackLoader/tests
-            options:
-                outputdir: robot/SalesforceDataPackLoader/results
+            path: force-app
 
-    robot_testdoc:
-        options:
-            path: robot/SalesforceDataPackLoader/tests
-            output: robot/SalesforceDataPackLoader/doc/SalesforceDataPackLoader_tests.html
+flows:
+    test_in_scratch_org:
+        description: "Demo the technique in a scratch org. Not for use in a real org."
+        steps:
+            1:
+                task: deploy
+                options:
+                    path: force-app
+            2:
+                task: deploy
+                when: org_config.scratch
+                options:
+                    path: Github_Gists_RemoteSiteSetting
 
+            3:
+                task: set_duplicate_rule_status
+                when: org_config.scratch
+                options:
+                    active: False
+
+            4:
+                task: execute_anon
+                when: org_config.scratch
+                options:
+                    path: scripts/apex/DemoJSONData.apex
