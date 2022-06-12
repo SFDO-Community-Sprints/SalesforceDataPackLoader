@@ -7,6 +7,9 @@
         <locationY>278</locationY>
         <actionName>LoadSnowfakeryJSONData</actionName>
         <actionType>apex</actionType>
+        <connector>
+            <targetReference>Load_Data_Success_Screen</targetReference>
+        </connector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>json_url</name>
@@ -58,6 +61,22 @@
             <fieldText>URL</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Load_Data_Success_Screen</name>
+        <label>Load Data Success Screen</label>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Load_Data_Success_Text</name>
+            <fieldText>&lt;p&gt;Success!&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
