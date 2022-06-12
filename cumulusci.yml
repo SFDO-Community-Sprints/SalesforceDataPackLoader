@@ -1,0 +1,40 @@
+minimum_cumulusci_version: '3.60.0.dev1'
+project:
+    name: SalesforceDataPackLoader
+    package:
+        name: SalesforceDataPackLoader
+        api_version: '54.0'
+    git:
+        default_branch: 'main'
+    source_format: sfdx
+
+tasks:
+    deploy:
+        options:
+            path: force-app
+
+flows:
+    test_in_scratch_org:
+        description: "Demo the technique in a scratch org. Not for use in a real org."
+        steps:
+            1:
+                task: deploy
+                options:
+                    path: force-app
+            2:
+                task: deploy
+                when: org_config.scratch
+                options:
+                    path: Github_Gists_RemoteSiteSetting
+
+            3:
+                task: set_duplicate_rule_status
+                when: org_config.scratch
+                options:
+                    active: False
+
+            4:
+                task: execute_anon
+                when: org_config.scratch
+                options:
+                    path: scripts/apex/DemoJSONData.apex
