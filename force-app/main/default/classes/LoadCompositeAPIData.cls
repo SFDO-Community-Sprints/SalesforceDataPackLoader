@@ -143,10 +143,10 @@ public class LoadCompositeAPIData {
 
     private static String parseResponse(String response) {
         Map<String, Object> graph_parse = (Map<String, Object>)Json.deserializeUntyped(response);
-        return parseError(graph_parse);
+        return lookForError(graph_parse);
     }
 
-    private static String parseError(Map<String, Object> graph_parse){
+    private static String lookForError(Map<String, Object> graph_parse){
         String rc = null;
         List<Object> graphs = (List<Object>)graph_parse.get('graphs');
         for(Object graph: graphs){
@@ -161,10 +161,13 @@ public class LoadCompositeAPIData {
                 if(status!=200 && status!=201){
                     List<Object> body = (List<Object>)single_response_obj.get('body');
                     Map<String, Object> body_obj = (Map<String, Object>)body[0];
-                    if(rc==null && (String)body_obj.get('errorCode')!='PROCESSING_HALTED') {
+                    if(rc==null || rc.indexOf('another operation') != 1) {
                         System.debug('Error: ' + body.toString());
                         rc = body_obj.toString();
-                        break;
+                        // Try to find a "real" error and quit
+                        if(rc.indexOf('another operation') == -1){
+                            return rc;
+                        }
                     }
                 }
             }

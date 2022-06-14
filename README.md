@@ -12,17 +12,15 @@ shown in the file `scripts/apex/DemoJSONData.apex`
 
 You can load data from Flows by calling the Apex action called
 `Load Snowfakery Data Bundle` and passing a Data Bundle URL to the parameter called
-`json_url`. Here are some JSON bundle URLs you could try:
+`json_url`. Here is a JSON bundle URL you could try:
 
 ```
 https://gist.githubusercontent.com/prescod/85efa2b30e52c4ca97d24f5a61631aa4/raw/4e293e07877d63b965f2c75f6bf2edafea3230b4/composite.json
-
-https://gist.githubusercontent.com/prescod/ffa992a7218906ab0dcf160b5d755259/raw/f9d40587a2ba9b04275241723637ed571bd55617/Graph%2520Gist'
 ```
 
 ## Running a Demo of the Feature
 
-Running a demo entails five steps:
+Running a demo entails these steps:
 
 1. Create a scratch org
 2. Deploy the classes with CumulusCI or SFDX
